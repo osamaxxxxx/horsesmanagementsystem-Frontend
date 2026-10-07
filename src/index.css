@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Cairo', sans-serif;
+}
+
+.pattern-bg {
+    background-color: #0b2e23;
+    background-image: radial-gradient(#c59b27 0.75px, transparent 0.75px), radial-gradient(#c59b27 0.75px, #0b2e23 0.75px);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+
+@layer components {
+    .card {
+        @apply bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm;
+    }
+    .label {
+        @apply block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1;
+    }
+    .input {
+        @apply w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-sm text-slate-800 dark:text-slate-100 outline-none transition
+            placeholder:text-slate-400 dark:placeholder:text-slate-500
+            focus:border-amber-500 focus:ring-2 focus:ring-amber-200 dark:focus:ring-amber-500/30
+            disabled:bg-slate-100 disabled:text-slate-500 dark:disabled:bg-slate-800 dark:disabled:text-slate-500;
+    }
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition disabled:opacity-60;
+    }
+    .btn-primary {
+        @apply bg-amber-600 hover:bg-amber-500 text-white shadow;
+    }
+    .btn-ghost {
+        @apply bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800;
+    }
+    .btn-dark {
+        @apply bg-slate-800 hover:bg-slate-700 text-white dark:bg-slate-700 dark:hover:bg-slate-600;
+    }
+    .hdr-btn {
+        @apply h-8 px-2.5 inline-flex items-center gap-1.5 rounded-lg bg-emerald-950/70 hover:bg-emerald-900 border border-amber-500/30 text-amber-200 text-xs font-bold whitespace-nowrap transition;
+    }
+    .alert-error {
+        @apply text-xs font-bold text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 rounded-xl p-2.5;
+    }
+    .modal-backdrop {
+        @apply fixed inset-0 z-40 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto;
+    }
+    .modal-panel {
+        @apply bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full my-auto overflow-hidden;
+    }
+}
+
+/* The printout is its own sheet (PrintSheet): every filtered record, every column, full text. */
+.print-sheet {
+    display: none;
+}
+
+@media print {
+    @page {
+        size: A4 landscape;
+        margin: 8mm;
+    }
+    html,
+    body {
+        background: #fff !important;
+    }
+    .screen-only {
+        display: none !important;
+    }
+    .print-sheet {
+        display: block;
+        color: #000;
+        font-size: 8pt;
+        line-height: 1.45;
+    }
+    .print-sheet h1 {
+        font-size: 14pt;
+        font-weight: 800;
+        text-align: center;
+    }
+    .print-sheet .print-meta {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4mm;
+        margin: 1.5mm 0 3mm;
+        font-size: 8.5pt;
+    }
+    .print-sheet table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+    .print-sheet thead {
+        display: table-header-group;
+    }
+    .print-sheet tr {
+        break-inside: avoid;
+    }
+    .print-sheet th,
+    .print-sheet td {
+        border: 1px solid #666;
+        padding: 3px 4px;
+        vertical-align: top;
+        text-align: start;
+        white-space: pre-line;
+        overflow-wrap: break-word;
+    }
+    .print-sheet th {
+        background: #e5e7eb;
+        font-weight: 800;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
